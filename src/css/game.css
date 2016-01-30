@@ -12,12 +12,11 @@ body
     position: absolute !important;
     right: 0;
     top: 0;
-    background: none repeat scroll 0 0 #ffffff;
-    height: 416px;
+	background: none repeat scroll 0 0 #ffffff;
+	height: 675px;
     overflow: hidden;
     position: relative;
-    width: 320px;
-    cursor: none;
+	width: 1200px;
 }
 
 span {

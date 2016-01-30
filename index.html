@@ -5,16 +5,9 @@
 	<title>i am alone.</title>
 	<link rel="stylesheet" href="src/css/game.css" type="text/css" />
 	<script src="src/phaser/build/phaser.js"></script>
-	<script src="src/js/Game.js"></script>
 </head>
 <body>
 	<div id="gameContainer"></div>
-	<script type="text/javascript">
-		window.onload = function() {
-			var game = new Phaser.Game(800, 600, Phaser.AUTO, "gameContainer");
-			game.state.add("Game", Alone.Game);
-			game.state.start("Game");
-		};
-	</script>
+    <script type="text/javascript" src="src/js/main.js"></script>
 </body>
 </html>
