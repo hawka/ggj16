@@ -18,23 +18,24 @@ var oldStates = []
 var font = "Bold 72px Consolas"
 var font_px = 90
 var screen = {}
+var bg;
+var preText = "";
 
 function preload() {
   // load image assets and story text
+  game.load.script('levels', 'src/js/text.js')
+  game.load.image('alone', 'src/assets/alone-desert.jpg');
   game.load.image('snow', 'src/assets/alone-snow.jpg');
-
   game.load.image('drown', 'src/assets/alone-drown.jpg');
-
   game.load.image('forest', 'src/assets/alone-forest.jpg');
-
   game.load.image('desert', 'src/assets/alone-desert.jpg');
   game.load.image('desert-birds', 'src/assets/desert-birds.jpg');
 }
 
 function create() {
   game.stage.backgroundColor = '#182d3b';
-  game.add.tileSprite(0, 0, 1200, 675, 'alone');
-  newScreen(testScreen1);
+  bg = game.add.tileSprite(0, 0, 1200, 675, 'alone');
+  newScreen(start());
 }
 
 function update() {
@@ -49,12 +50,16 @@ function render() {
 }
 
 function nextToken(s) {
+  if (typeof s === "function") {
+    newScreen(s());
+    return
+  }
   if (s == null) {
     return //FIXME
   }
   currentScope = s;
   var first = [];
-  var y = 32;
+  var y = preText.bottom;
   var x = 32;
   if (oldStates.length > 0) {
     x = (oldStates[oldStates.length-1].width/2 + oldStates[oldStates.length-1].x);
@@ -77,11 +82,16 @@ function nextToken(s) {
 var currentScreen;
 var currentScope;
 
-// TODO break up, encapsulate
-function newScreen(s) {
-  console.log("NEW SCREEN", s);
-  currentScreen = s;
-  nextToken(s)
+function newScreen(scene) {
+  clearScene();
+  console.log("NEW SCREEN", scene);
+  preText = game.add.text(32, 32, scene.pre_text, { font: font, fill: '#ffffff', align: "left" });
+  if (!scene.pre_text) {
+    preText.height = 0
+  }
+  
+  currentScreen = scene.choice_tree;
+  nextToken(currentScreen);
 }
 
 function resetToken(w) {
@@ -107,7 +117,16 @@ function resetToken(w) {
   nextToken(scope)
 }
   
-
+function clearScene(){
+  if (preText) {
+    preText.destroy();
+  }
+  clearState();
+  for (i in oldStates) {
+    oldStates[i].destroy();
+  }
+  oldStates = [];
+}
 
 
 function clearState(){
@@ -120,10 +139,11 @@ function clearState(){
 //TODO encapsulate
 function wordClickLatest(item) {
   //set to decided
-  token = item.token
-  x = item.x
-  clearState()
-  t = game.add.text(x, 32, token, { font: font, fill: '#ffffff', align: "left"});
+  token = item.token;
+  x = item.x;
+  y = item.y
+  clearState();
+  t = game.add.text(x, y, token, { font: font, fill: '#ffffff', align: "left"});
   t.token = token;
   t.inputEnabled = true;
   t.input.useHandCursor = true;
@@ -150,12 +170,3 @@ function hoverOldChoice(item) {
 function resetChoice(item) {
   resetToken(item.token)
 }
-
-
-var testScreen1 = {
-  "I ": { "am ": {"alone.": function(){return testScreen2}}},
-  "We ": { "are.": null, "remember the way it was.": null},
-  "A cool guy ": { "are.": null, "remember the way it was.": null},
-}
-var testScreen2 = {"done.": null}
-

@@ -49,7 +49,7 @@ var start = function () {
 };
 
 var A = function () {
-	var pretext = "I am alone. \n"
+	var pretext = "I am alone."
 	var inmap = {
 		"I | am | cold.": B,
 		"I | am | hungry.": C,
@@ -62,7 +62,7 @@ var A = function () {
 // Tundra tree.
 var B = function () {
 	game_decisions.loc = "snow";
-	var pretext = "I am alone. \n I am cold. \n";
+	var pretext = "I am alone. \nI am cold.";
 	var inmap = {
 		// TODO
 	};
@@ -72,7 +72,7 @@ var B = function () {
 // Forest tree.
 var C = function () {
 	game_decisions.loc = "forest";
-	var pretext = "I am alone. \n I am hungry. \n";
+	var pretext = "I am alone. \n I am hungry.";
 	var inmap = {
 		"I | scavenge | for edible plants.": Cb,
 		"I | gather | wood grubs and worms.": Cc,
@@ -82,7 +82,7 @@ var C = function () {
 };
 
 var Cb = function() {
-	var pretext = "One of the plants makes me sick, but the others are good. \n"
+	var pretext = "One of the plants makes me sick, but the others are good."
 	game_decisions.agr += 1;
 	var inmap = {
 		"The sun | is | setting.": C_a,
@@ -93,7 +93,7 @@ var Cb = function() {
 };
 
 var Cc = function() {
-	var pretext = "I grind the grubs into a paste and scoop it into my mouth. \n";
+	var pretext = "I grind the grubs into a paste and scoop it into my mouth.";
 	game_decisions.too += 1;
 	var inmap = {
 		"The sun | is | setting.": C_a,
@@ -104,7 +104,7 @@ var Cc = function() {
 };
 
 var Cd = function() {
-	var pretext = "It takes hours, but I finally manage to catch a small rabbit. \n";
+	var pretext = "It takes hours, but I finally manage to catch a small rabbit.";
 	game_decisions.hun += 1;
 	var inmap = {
 		"I | eat | it raw.": Ce,
@@ -130,7 +130,7 @@ var C_a = function() {
 // Harbor tree.
 var D = function () {
 	game_decisions.loc = "drown";
-	var pretext = "I am alone. \n I am lost. \n";
+	var pretext = "I am alone. \nI am lost.";
 	var inmap = {
 		"I | was | drowning.": Da,
 		"I | remember | a storm.": Da,
@@ -147,7 +147,7 @@ var Da = function() {
 // Desert tree.
 var E = function() {
 	game_decisions.loc = "desert";
-	var pretext = "I am alone. \n I am thirsty. \n";
+	var pretext = "I am alone. \nI am thirsty.";
 	var inmap = {
 		"I | look to | the sky.": Ea,
 		"I | look to | the ground.": Eb,
@@ -157,18 +157,18 @@ var E = function() {
 
 var Ea = function() {
 	game_decisions.loc = "desert-birds";
-	var pretext = "I am thirsty. \n"
+	var pretext = "I am thirsty."
 	var inmap = {
-		"I | see | birds circling to the north. \n": E_a,
+		"I | see | birds circling to the north.": E_a,
 	};
 	return parse_sentence(pretext, inmap);
 };
 
 var Eb = function() {
-	var pretext = "I am thirsty. \n"
+	var pretext = "I am thirsty."
 	var inmap = {
-		"I | notice | animal tracks leading north. \n": E_a,
-		"I | follow | a dry river bed. \n": E_a,
+		"I | notice | animal tracks leading north.": E_a,
+		"I | follow | a dry river bed.": E_a,
 	};
 	return parse_sentence(pretext, inmap);
 };
@@ -176,7 +176,7 @@ var Eb = function() {
 var E_a = function() {
 	game_decisions.loc = "oasis";
 	var inmap = {
-		"I | find | an oasis.": E_b;
+		"I | find | an oasis.": E_b,
 	};
 	return parse_sentence("", inmap);
 };
