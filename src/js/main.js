@@ -30,6 +30,7 @@ function preload() {
   game.load.image('forest', 'src/assets/alone-forest.jpg');
   game.load.image('desert', 'src/assets/alone-desert.jpg');
   game.load.image('desert-birds', 'src/assets/desert-birds.jpg');
+  game.load.image('desert-oasis', 'src/assets/desert-oasis.jpg');
 }
 
 function create() {

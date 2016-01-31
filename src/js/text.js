@@ -175,7 +175,7 @@ var Eb = function() {
 };
 
 var E_a = function() {
-	game_decisions.loc = "oasis";
+	game_decisions.loc = "desert-oasis";
 	var inmap = {
 		"I | find | an oasis.": E_b,
 	};
