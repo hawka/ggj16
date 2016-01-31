@@ -1,5 +1,11 @@
 var game_decisions = {
 	loc: "",
+	agr: 0, // agriculture
+	mil: 0, // military
+	dip: 0, // diplomacy
+	hun: 0, // hunting
+	too: 0, // tools + tech
+	art: 0, // art
 };
 
 var parse_sentence = function(pre_text, input_map) {
@@ -36,13 +42,14 @@ var parse_sentence = function(pre_text, input_map) {
 };
 
 var start = function () {
-	var map = {
+	var inmap = {
 		"I | am | alone.": A
 	};
 };
 
 var A = function () {
-	var map = {
+	var pretext = "I am alone. \n"
+	var inmap = {
 		"I | am | cold.": B,
 		"I | am | hungry.": C,
 		"I | am | lost.": D,
@@ -50,7 +57,111 @@ var A = function () {
 	};
 };
 
+// Tundra tree.
 var B = function () {
-	// TODO change image
 	game_decisions.loc = "snow";
+	var pretext = "I am alone. \n I am cold. \n";
+	var inmap = {
+		"": ,
+	};
+};
+
+// Forest tree.
+var C = function () {
+	game_decisions.loc = "forest";
+	var pretext = "I am alone. \n I am hungry. \n";
+	var inmap = {
+		"I | scavenge | for edible plants.": Cb,
+		"I | gather | wood grubs and worms.": Cc,
+		"I | try to | catch a rabbit.": Cd
+	};
+};
+
+var Cb = function() {
+	var pretext = "One of the plants makes me sick, but the others are good. \n"
+	game_decisions.agr += 1;
+	var inmap = {
+		"The sun | is | setting.": C_a,
+		"The sun | is | hidden.": C_a,
+		"I | need | shelter.": C_a
+	};
+};
+
+var Cc = function() {
+	var pretext = "I grind the grubs into a paste and scoop it into my mouth. \n";
+	game_decisions.too += 1;
+	var inmap = {
+		"The sun | is | setting.": C_a,
+		"The sun | is | hidden.": C_a,
+		"I | need | shelter.": C_a
+	};
+};
+
+var Cd = function() {
+	var pretext = "It takes hours, but I finally manage to catch a small rabbit. \n";
+	game_decisions.hun += 1;
+	var inmap = {
+		"I | eat | it raw.": Ce,
+	};
+};
+
+var Ce = function() {
+	var inmap = {
+		"The sun | is | setting.": C_a,
+		"The sun | is | hidden.": C_a,
+		"I | need | shelter.": C_a
+	};
+};
+
+var C_a = function() {
+	var inmap = {
+	};
+};
+
+// Harbor tree.
+var D = function () {
+	game_decisions.loc = "drown";
+	var pretext = "I am alone. \n I am lost. \n";
+	var inmap = {
+		"I | was | drowning.": Da,
+		"I | remember | a storm.": Da,
+		"I | remember | a wave.": Da,
+		"I | remember | nothing.": Da
+	};
+};
+
+var Da = function() {
+	// TODO
+};
+
+// Desert tree.
+var E = function() {
+	game_decisions.loc = "desert";
+	var pretext = "I am alone. \n I am thirsty. \n";
+	var inmap = {
+		"I | look to | the sky.": Ea,
+		"I | look to | the ground.": Eb,
+	};
+};
+
+var Ea = function() {
+	var pretext = "I am thirsty. \n"
+	var inmap = {
+		"I | see | birds circling to the north. \n": E_a,
+	};
+};
+
+var Eb = function() {
+	var pretext = "I am thirsty. \n"
+	var inmap = {
+		"I | notice | animal tracks leading north. \n": E_a,
+		"I | follow | a dry river bed. \n": E_a,
+	};
+};
+
+var E_a = function() {
+	game_decisions.loc = "oasis";
+	var inmap = {
+		"I | find | an oasis.": E_b;
+	};
 };
