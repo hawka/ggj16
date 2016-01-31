@@ -2,40 +2,51 @@ var game_decisions = {
 	loc: "",
 };
 
-var parseSentence = function(map) {
-	// TODO turn this example into a thing that happens.
-	var input_text = "I am alone. \n"
-	var input = {
-		"I | am | cold. ⇛": B,
-		"I | am | hungry. ⇛": C,
-		"I | am | lost. ⇛": D,
+var parse_sentence = function(pre_text, input_map) {
+	var output;
+	var choice_tree = {};
+
+	var populate_tree = function(slices, offset, obj, cb) {
+		if (offset >= slices.length) {
+			return cb;
+		}
+		var k = slices[offset];
+		if (!obj.hasOwnProperty(k)) {
+			obj[k] = populate_tree(slices, offset+1, {}, cb)
+		} else {
+			obj[k] = populate_tree(slices, offset+1, obj[k], cb)
+		}
+		return obj;
 	};
-	var output = {
-		choice_tree: {
-			pre_text: "I am alone. \n",
-			"I": {
-				"am:" {
-					"cold.": "B",
-					 "hungry.": "C"
-				},
-				"was": {
-				},
-			},
-		},
+
+	for (var key in input_map) {
+		if (!input_map.hasOwnProperty(key)) {
+			continue;
+		}
+		var slices = key.split("| ");
+		choice_tree = populate_tree(slices, 0, choice_tree, input_map[key]);
 	}
+
+	var output = {
+		"pre_text": pre_text,
+		"choice_tree": choice_tree
+	};
+
+	return output
 };
 
 var start = function () {
 	var map = {
-		"I | am | alone. ⇛": A
+		"I | am | alone.": A
 	};
 };
 
 var A = function () {
 	var map = {
-		"I | am | cold. ⇛": B,
-		"I | am | hungry. ⇛": C,
-		"I | am | lost. ⇛": D,
+		"I | am | cold.": B,
+		"I | am | hungry.": C,
+		"I | am | lost.": D,
+		"I | am | thirsty.": E,
 	};
 };
 
