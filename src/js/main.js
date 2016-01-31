@@ -85,6 +85,7 @@ var currentScope;
 function newScreen(scene) {
   clearScene();
   console.log("NEW SCREEN", scene);
+	bg.loadTexture(game_decisions.loc)
   preText = game.add.text(32, 32, scene.pre_text, { font: font, fill: '#ffffff', align: "left" });
   if (!scene.pre_text) {
     preText.height = 0

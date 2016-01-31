@@ -42,6 +42,7 @@ var parse_sentence = function(pre_text, input_map) {
 };
 
 var start = function () {
+	game_decisions.loc = "alone";
 	var inmap = {
 		"I | am | alone.": A
 	};
