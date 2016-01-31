@@ -61,7 +61,7 @@ function nextToken(s) {
   }
   currentScope = s;
   var first = [];
-  baseY = preText.bottom;
+  baseY = preText.y + preText.height/2;
   var y = baseY;
   var x = 32;
   if (oldStates.length > 0) {
@@ -69,6 +69,7 @@ function nextToken(s) {
   }
   for (w in s) {
     var t = game.add.text(x, y, w, { font: font, fill: '#ffffff', align: "left" });
+    t.setShadow(0, 0, 'rgba(0,0,0,1)', 10); 
     t.token = w;
     t.inputEnabled = true;
     t.input.useHandCursor = true;
@@ -90,6 +91,7 @@ function newScreen(scene) {
   console.log("NEW SCREEN", scene);
 	bg.loadTexture(game_decisions.loc)
   preText = game.add.text(32, 32, scene.pre_text, { font: font, fill: '#ffffff', align: "left" });
+  preText.setShadow(0, 0, 'rgba(0,0,0,1)', 10); 
   if (!scene.pre_text) {
     preText.height = 0
   }
@@ -148,6 +150,7 @@ function wordClickLatest(item) {
   y = baseY
   clearState();
   t = game.add.text(x, y, token, { font: font, fill: '#ffffff', align: "left"});
+  t.setShadow(0, 0, 'rgba(0,0,0,1)', 10); 
   t.token = token;
   t.inputEnabled = true;
   t.input.useHandCursor = true;

@@ -73,7 +73,7 @@ var B = function () {
 // Forest tree.
 var C = function () {
 	game_decisions.loc = "forest";
-	var pretext = "I am alone. \n I am hungry.";
+	var pretext = "I am alone. \nI am hungry.";
 	var inmap = {
 		"I | scavenge | for edible plants.": Cb,
 		"I | gather | wood grubs and worms.": Cc,
