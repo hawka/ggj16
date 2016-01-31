@@ -3,12 +3,31 @@ var game_decisions = {
 };
 
 var parseSentence = function(map) {
-	// TODO
+	// TODO turn this example into a thing that happens.
+	var input_text = "I am alone. \n"
+	var input = {
+		"I | am | cold. ⇛": B,
+		"I | am | hungry. ⇛": C,
+		"I | am | lost. ⇛": D,
+	};
+	var output = {
+		choice_tree: {
+			pre_text: "I am alone. \n",
+			"I": {
+				"am:" {
+					"cold.": "B",
+					 "hungry.": "C"
+				},
+				"was": {
+				},
+			},
+		},
+	}
 };
 
 var start = function () {
 	var map = {
-		"I am alone. ⇛": A
+		"I | am | alone. ⇛": A
 	};
 };
 
