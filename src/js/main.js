@@ -43,12 +43,11 @@ function render() {
   // TODO
 }
 
-function newScreen(s) {
+function nextToken(s) {
   if (s == null) {
-    return
+    return //FIXME
   }
-  console.log("NEW SCREEN", s)
-  screen = s;
+  currentScope = s;
   var first = [];
   var y = 32;
   var x = 32;
@@ -69,6 +68,43 @@ function newScreen(s) {
   textState = first;
 }
 
+
+var currentScreen;
+var currentScope;
+
+// TODO break up, encapsulate
+function newScreen(s) {
+  console.log("NEW SCREEN", s);
+  currentScreen = s;
+  nextToken(s)
+}
+
+function resetToken(w) {
+  var i = 0;
+  var scope = currentScreen;
+  clearState();
+
+  // iterate til we find the token
+  while (oldStates[0].token != w) {
+    scope = scope[oldStates[i].token];
+    i++;
+  } 
+
+  // kill the remaining tokens
+  var j = i;
+  while (j < oldStates.length) {
+    oldStates[j].destroy();
+    j++;
+  }
+  oldStates = oldStates.slice(0,i);
+
+  // set current token
+  nextToken(scope)
+}
+  
+
+
+
 function clearState(){
     for (i in textState) {
       textState[i].destroy();
@@ -76,17 +112,23 @@ function clearState(){
     textState = [];
 }
 
-
+//TODO encapsulate
 function wordClickLatest(item) {
   //set to decided
   token = item.token
-    console.log("W:", item.width)
   x = item.x
   clearState()
   t = game.add.text(x, 32, token, { font: font, fill: '#ffffff', align: "left"});
- game.debug.body(t)
+  t.token = token;
+  t.inputEnabled = true;
+  t.input.useHandCursor = true;
+  t.input.pixelPerfectOver = true;
+  t.events.onInputOver.add(hoverOldChoice, this);
+  t.events.onInputOut.add(endHoverChoice, this);
+  t.events.onInputDown.add(resetChoice, this);
+  console.log(t.input);
   oldStates.push(t);
-  newScreen(screen[token]);
+  nextToken(currentScope[token]);
 }
 
 function hoverChoice(item) {
@@ -94,6 +136,14 @@ function hoverChoice(item) {
 }
 function endHoverChoice(item) {
   item.fill = "#ffffff"; //TODO colors
+}
+
+function hoverOldChoice(item) {
+  item.fill = "#ff4444"; //TODO colors
+}
+
+function resetChoice(item) {
+  resetToken(item.token)
 }
 
 
