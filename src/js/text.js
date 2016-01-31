@@ -38,13 +38,14 @@ var parse_sentence = function(pre_text, input_map) {
 		"choice_tree": choice_tree
 	};
 
-	return output
+	return output;
 };
 
 var start = function () {
 	var inmap = {
 		"I | am | alone.": A
 	};
+	return parse_sentence("", inmap);
 };
 
 var A = function () {
@@ -55,6 +56,7 @@ var A = function () {
 		"I | am | lost.": D,
 		"I | am | thirsty.": E,
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 // Tundra tree.
@@ -62,8 +64,9 @@ var B = function () {
 	game_decisions.loc = "snow";
 	var pretext = "I am alone. \n I am cold. \n";
 	var inmap = {
-		"": ,
+		// TODO
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 // Forest tree.
@@ -75,6 +78,7 @@ var C = function () {
 		"I | gather | wood grubs and worms.": Cc,
 		"I | try to | catch a rabbit.": Cd
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var Cb = function() {
@@ -85,6 +89,7 @@ var Cb = function() {
 		"The sun | is | hidden.": C_a,
 		"I | need | shelter.": C_a
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var Cc = function() {
@@ -95,6 +100,7 @@ var Cc = function() {
 		"The sun | is | hidden.": C_a,
 		"I | need | shelter.": C_a
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var Cd = function() {
@@ -103,6 +109,7 @@ var Cd = function() {
 	var inmap = {
 		"I | eat | it raw.": Ce,
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var Ce = function() {
@@ -111,11 +118,13 @@ var Ce = function() {
 		"The sun | is | hidden.": C_a,
 		"I | need | shelter.": C_a
 	};
+	return parse_sentence("", inmap);
 };
 
 var C_a = function() {
 	var inmap = {
 	};
+	return parse_sentence("", inmap);
 };
 
 // Harbor tree.
@@ -128,6 +137,7 @@ var D = function () {
 		"I | remember | a wave.": Da,
 		"I | remember | nothing.": Da
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var Da = function() {
@@ -142,6 +152,7 @@ var E = function() {
 		"I | look to | the sky.": Ea,
 		"I | look to | the ground.": Eb,
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var Ea = function() {
@@ -149,6 +160,7 @@ var Ea = function() {
 	var inmap = {
 		"I | see | birds circling to the north. \n": E_a,
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var Eb = function() {
@@ -157,6 +169,7 @@ var Eb = function() {
 		"I | notice | animal tracks leading north. \n": E_a,
 		"I | follow | a dry river bed. \n": E_a,
 	};
+	return parse_sentence(pretext, inmap);
 };
 
 var E_a = function() {
@@ -164,4 +177,5 @@ var E_a = function() {
 	var inmap = {
 		"I | find | an oasis.": E_b;
 	};
+	return parse_sentence("", inmap);
 };
