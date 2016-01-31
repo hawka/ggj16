@@ -17,6 +17,7 @@ var textState = []
 var oldStates = []
 var font = "Bold 72px Consolas"
 var font_px = 90
+var baseY = 0
 var screen = {}
 var bg;
 var preText = "";
@@ -60,7 +61,8 @@ function nextToken(s) {
   }
   currentScope = s;
   var first = [];
-  var y = preText.bottom;
+  baseY = preText.bottom;
+  var y = baseY;
   var x = 32;
   if (oldStates.length > 0) {
     x = (oldStates[oldStates.length-1].width/2 + oldStates[oldStates.length-1].x);
@@ -102,7 +104,7 @@ function resetToken(w) {
   clearState();
 
   // iterate til we find the token
-  while (oldStates[0].token != w) {
+  while (oldStates[i].token != w) {
     scope = scope[oldStates[i].token];
     i++;
   } 
@@ -143,7 +145,7 @@ function wordClickLatest(item) {
   //set to decided
   token = item.token;
   x = item.x;
-  y = item.y
+  y = baseY
   clearState();
   t = game.add.text(x, y, token, { font: font, fill: '#ffffff', align: "left"});
   t.token = token;
