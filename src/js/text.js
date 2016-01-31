@@ -108,7 +108,7 @@ var Cd = function() {
 	var pretext = "It takes hours, but I finally manage to catch a small rabbit.";
 	game_decisions.hun += 1;
 	var inmap = {
-		"I | eat | it raw.": Ce,
+		"I | eat | it raw.": Ce
 	};
 	return parse_sentence(pretext, inmap);
 };
@@ -124,6 +124,7 @@ var Ce = function() {
 
 var C_a = function() {
 	var inmap = {
+		// TODO
 	};
 	return parse_sentence("", inmap);
 };
@@ -151,7 +152,7 @@ var E = function() {
 	var pretext = "I am alone. \nI am thirsty.";
 	var inmap = {
 		"I | look to | the sky.": Ea,
-		"I | look to | the ground.": Eb,
+		"I | look to | the ground.": Eb
 	};
 	return parse_sentence(pretext, inmap);
 };
@@ -160,7 +161,7 @@ var Ea = function() {
 	game_decisions.loc = "desert-birds";
 	var pretext = "I am thirsty."
 	var inmap = {
-		"I | see | birds circling to the north.": E_a,
+		"I | see | birds circling to the north.": E_a
 	};
 	return parse_sentence(pretext, inmap);
 };
@@ -169,7 +170,7 @@ var Eb = function() {
 	var pretext = "I am thirsty."
 	var inmap = {
 		"I | notice | animal tracks leading north.": E_a,
-		"I | follow | a dry river bed.": E_a,
+		"I | follow | a dry river bed.": E_a
 	};
 	return parse_sentence(pretext, inmap);
 };
@@ -177,7 +178,11 @@ var Eb = function() {
 var E_a = function() {
 	game_decisions.loc = "desert-oasis";
 	var inmap = {
-		"I | find | an oasis.": E_b,
+		"I | find | an oasis.": E_b
 	};
 	return parse_sentence("", inmap);
+};
+
+var E_b = function() {
+	// TODO
 };
