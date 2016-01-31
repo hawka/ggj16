@@ -156,6 +156,7 @@ var E = function() {
 };
 
 var Ea = function() {
+	game_decisions.loc = "desert-birds";
 	var pretext = "I am thirsty. \n"
 	var inmap = {
 		"I | see | birds circling to the north. \n": E_a,

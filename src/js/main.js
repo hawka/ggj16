@@ -21,9 +21,14 @@ var screen = {}
 
 function preload() {
   // load image assets and story text
-  game.load.image('alone', 'src/assets/alone-desert.jpg');
   game.load.image('snow', 'src/assets/alone-snow.jpg');
+
+  game.load.image('drown', 'src/assets/alone-drown.jpg');
+
+  game.load.image('forest', 'src/assets/alone-forest.jpg');
+
   game.load.image('desert', 'src/assets/alone-desert.jpg');
+  game.load.image('desert-birds', 'src/assets/desert-birds.jpg');
 }
 
 function create() {
