@@ -24,7 +24,7 @@ var preText = "";
 function preload() {
   // load image assets and story text
   game.load.script('levels', 'src/js/text.js')
-  game.load.image('alone', 'src/assets/alone-desert.jpg');
+  game.load.image('alone', 'src/assets/alone.jpg');
   game.load.image('snow', 'src/assets/alone-snow.jpg');
   game.load.image('drown', 'src/assets/alone-drown.jpg');
   game.load.image('forest', 'src/assets/alone-forest.jpg');
